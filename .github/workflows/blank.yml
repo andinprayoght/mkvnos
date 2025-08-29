@@ -27,11 +27,11 @@ jobs:
 
     - name: Download MKV file
       run: |
-        curl -L -o video.mkv "https://tipigd.tipikug.workers.dev/0:/movieb/Pabrik.Gula.2025.1080p.NF.WEB-DL.DDP5.1.H.264-SEIKEL.mkv"
+        curl -L -o video.mkv "https://tipigd.tipikug.workers.dev/0:/movieb/Grave.of.the.Fireflies.1988.1080p.NF.WEB-DL.AAC2.0.JA-ID.H.264-JasDon.mkv"
 
     - name: Convert MKV to MP4
       run: |
-        ffmpeg -i video.mkv -vf "crop=1920:818:0:140,scale=1920:1080,subtitles=video.mkv:si=1:force_style='Fontsize=18,MarginV=25,PrimaryColour=&H0000FFFF'" -r 24 -c:v libx264 -preset veryfast -crf 24 -c:a aac -b:a 160k -ac 2 -af "volume=2.5" -movflags +faststart video.mp4
+        ffmpeg -i video.mkv -vf "scale=1920:1080" -r 24 -c:v libx264 -preset veryfast -crf 24 -c:a aac -b:a 160k -ac 2 -af "volume=2.5" -movflags +faststart video.mp4
 
     - name: Upload to Google Drive
       run: python3 upload_to_gdrive.py video.mp4
